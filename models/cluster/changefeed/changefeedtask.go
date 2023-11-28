@@ -158,14 +158,24 @@ type ChangeFeedDownStream interface {
 	GetSinkURI() string
 }
 
+//func (p *MysqlDownstream) GetSinkURI() string {
+//	p.Ip = strings.TrimPrefix(p.Ip, "http://")
+//	return fmt.Sprintf("mysql://%s:%s@%s:%d/?worker-count=%d&max-txn-row=%d", p.Username, p.Password, p.Ip, p.Port, p.WorkerCount, p.MaxTxnRow)
+//}
+//
+//func (p *TiDBDownstream) GetSinkURI() string {
+//	p.Ip = strings.TrimPrefix(p.Ip, "http://")
+//	return fmt.Sprintf("mysql://%s:%s@%s:%d/?worker-count=%d&max-txn-row=%d", p.Username, p.Password, p.Ip, p.Port, p.WorkerCount, p.MaxTxnRow)
+//}
+
 func (p *MysqlDownstream) GetSinkURI() string {
 	p.Ip = strings.TrimPrefix(p.Ip, "http://")
-	return fmt.Sprintf("mysql://%s:%s@%s:%d/?worker-count=%d&max-txn-row=%d", p.Username, p.Password, p.Ip, p.Port, p.WorkerCount, p.MaxTxnRow)
+	return fmt.Sprintf("mysql://%s:%s@%s:%d/?worker-count=%d&max-txn-row=%d", p.Username, p.Password, p.Ip, p.Port, 1, 1)
 }
 
 func (p *TiDBDownstream) GetSinkURI() string {
 	p.Ip = strings.TrimPrefix(p.Ip, "http://")
-	return fmt.Sprintf("mysql://%s:%s@%s:%d/?worker-count=%d&max-txn-row=%d", p.Username, p.Password, p.Ip, p.Port, p.WorkerCount, p.MaxTxnRow)
+	return fmt.Sprintf("mysql://%s:%s@%s:%d/?worker-count=%d&max-txn-row=%d", p.Username, p.Password, p.Ip, p.Port, 1, 1)
 }
 
 func (p *KafkaDownstream) GetSinkURI() string {
