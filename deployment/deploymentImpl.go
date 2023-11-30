@@ -71,7 +71,8 @@ func (m *Manager) Deploy(ctx context.Context, componentType TiUPComponentType, c
 	tiUPArgs := fmt.Sprintf("%s %s %s %s %s %s %s %d %s", componentType, CMDDeploy, clusterID, version, configYamlFilePath,
 		strings.Join(args, " "), FlagWaitTimeout, timeout, CMDYes)
 	op := fmt.Sprintf("TIUP_HOME=%s %s %s", home, m.TiUPBinPath, tiUPArgs)
-	logInFunc.Infof("recv operation req: %s", op)
+	logInFunc.Infof("[ABC] deploy cluster: %s", op)
+	logInFunc.Infof("[ABC] topo content: %s", configYaml)
 
 	id, err := Create(home, Operation{
 		Type:       CMDDeploy,
@@ -104,7 +105,7 @@ func (m *Manager) Start(ctx context.Context, componentType TiUPComponentType, cl
 
 	tiUPArgs := fmt.Sprintf("%s %s %s %s %s %d %s", componentType, CMDStart, clusterID, strings.Join(args, " "), FlagWaitTimeout, timeout, CMDYes)
 	op := fmt.Sprintf("TIUP_HOME=%s %s %s", home, m.TiUPBinPath, tiUPArgs)
-	logInFunc.Infof("recv operation req: %s", op)
+	logInFunc.Infof("[ABC] start cluster: %s", op)
 
 	id, err := Create(home, Operation{
 		Type:       CMDStart,

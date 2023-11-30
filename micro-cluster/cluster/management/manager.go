@@ -316,6 +316,7 @@ var createClusterFlow = workflow.WorkFlowDefine{
 // @return resp
 // @return err
 func (p *Manager) CreateCluster(ctx context.Context, req cluster.CreateClusterReq) (resp cluster.CreateClusterResp, err error) {
+	framework.LogWithContext(ctx).Infof("[ABC] create cluster request: %+v", req)
 	err = validator(ctx, &req)
 	if err != nil {
 		return
