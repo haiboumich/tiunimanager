@@ -113,6 +113,7 @@ var scaleOutDefine = workflow.WorkFlowDefine{
 // @Return		cluster.ScaleOutClusterResp
 // @Return		error
 func (p *Manager) ScaleOut(ctx context.Context, request cluster.ScaleOutClusterReq) (resp cluster.ScaleOutClusterResp, err error) {
+	framework.LogWithContext(ctx).Infof("[ABC] scale out cluster request: %+v", request)
 	// Get cluster info and topology from db based by clusterID
 	clusterMeta, err := meta.Get(ctx, request.ClusterID)
 	if err != nil {
@@ -248,6 +249,7 @@ var cloneDefine = workflow.WorkFlowDefine{
 // @Return		cluster.CloneClusterResp
 // @Return		error
 func (p *Manager) Clone(ctx context.Context, request cluster.CloneClusterReq) (resp cluster.CloneClusterResp, err error) {
+	framework.LogWithContext(ctx).Infof("[ABC] clone cluster request: %+v", request)
 	// Get source cluster info and topology from db based by SourceClusterID
 	sourceClusterMeta, err := meta.Get(ctx, request.SourceClusterID)
 	if err != nil {
@@ -255,6 +257,7 @@ func (p *Manager) Clone(ctx context.Context, request cluster.CloneClusterReq) (r
 			"load source cluster %s meta from db error: %s", request.SourceClusterID, err.Error())
 		return
 	}
+	framework.LogWithContext(ctx).Infof("[ABC] source cluster meta: %+v", sourceClusterMeta)
 
 	// Clone source cluster meta to get cluster topology
 	clusterMeta, err := sourceClusterMeta.CloneMeta(ctx, request.CreateClusterParameter,
@@ -264,6 +267,7 @@ func (p *Manager) Clone(ctx context.Context, request cluster.CloneClusterReq) (r
 			"clone cluster %s meta error: %s", sourceClusterMeta.Cluster.ID, err.Error())
 		return
 	}
+	framework.LogWithContext(ctx).Infof("[ABC] clone cluster meta: %+v", clusterMeta)
 
 	// Update cluster maintenance status and async start workflow
 	data := map[string]interface{}{

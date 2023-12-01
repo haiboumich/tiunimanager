@@ -245,7 +245,8 @@ func (m *Manager) ScaleOut(ctx context.Context, componentType TiUPComponentType,
 
 	tiUPArgs := fmt.Sprintf("%s %s %s %s %s %s %d %s", componentType, CMDScaleOut, clusterID, configYamlFilePath, strings.Join(args, " "), FlagWaitTimeout, timeout, CMDYes)
 	op := fmt.Sprintf("TIUP_HOME=%s %s %s", home, m.TiUPBinPath, tiUPArgs)
-	logInFunc.Infof("recv operation req: %s", op)
+	logInFunc.Infof("[ABC] deploy cluster: %s", op)
+	logInFunc.Infof("[ABC] topo content: %s", configYaml)
 
 	id, err := Create(home, Operation{
 		Type:       CMDScaleOut,
@@ -384,7 +385,7 @@ func (m *Manager) Reload(ctx context.Context, componentType TiUPComponentType, c
 
 	tiUPArgs := fmt.Sprintf("%s %s %s %s %s %d %s", componentType, CMDReload, clusterID, strings.Join(args, " "), FlagWaitTimeout, timeout, CMDYes)
 	op := fmt.Sprintf("TIUP_HOME=%s %s %s", home, m.TiUPBinPath, tiUPArgs)
-	logInFunc.Infof("recv operation req: %s", op)
+	logInFunc.Infof("[ABC] reload cluster: %s", op)
 
 	id, err := Create(home, Operation{
 		Type:       CMDReload,
