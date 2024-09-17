@@ -231,6 +231,7 @@ func validationParameter(node *workflowModel.WorkFlowNode, ctx *workflow.FlowCon
 		return err
 	}
 	framework.LogWithContext(ctx).Debugf("got validation parameters size: %d", len(modifyParam.Params))
+	framework.LogWithContext(ctx).Infof("[ABC] got validation parameters: %v", modifyParam.Params)
 
 	for _, param := range modifyParam.Params {
 		// validate parameter value by range field
